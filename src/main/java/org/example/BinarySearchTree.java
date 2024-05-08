@@ -1,7 +1,10 @@
 package org.example;
 
 
-    class Node {
+import java.util.ArrayList;
+import java.util.List;
+
+class Node {
         //sirt
         int data;
         Node left;
@@ -185,7 +188,128 @@ public class BinarySearchTree {
         postOrderTraversal(root.right);
         System.out.print(root.data + " ");
     }
+    public Node findParent(Node node, int id) {
+        if (node == null || node.data == id) {
+            return null; // No parent found or target node is root
+        }
+        if ((node.left != null && node.left.data == id) || (node.right != null && node.right.data == id)) {
+            return node; // Parent of the target node
+        }
+        Node leftParent = findParent(node.left, id);
+        if (leftParent != null) {
+            return leftParent;
+        }
+        return findParent(node.right, id);
+    }
+    // Method to find all cousins of a node
+    public List<Integer> findCousins(int data) {
+        List<Integer> cousins = new ArrayList<>();
+        int level = findLevel(root, data, 1);
+        if (level <= 1) {
+            // Node is either root or does not exist
+            return cousins;
+        }
+        Node parent = findParent(root, data);
+        if (parent == null) {
+            // Node is root or not found, no cousins
+            return cousins;
+        }
+        for (int i = 1; i <= level - 1; i++) {
+            findCousins(root, data, i, parent, cousins);
+        }
+        return cousins;
+    }
 
+    // Helper method to find cousins at a given level
+    private void findCousins(Node node, int data, int level, Node parent, List<Integer> cousins) {
+        if (node == null) {
+            return;
+        }
+        if (level == 1) {
+            if (node != parent && (parent == null || node != parent.left && node != parent.right)) {
+                cousins.add(node.data);
+            }
+        } else if (level > 1) {
+            findCousins(node.left, data, level - 1, parent, cousins);
+            findCousins(node.right, data, level - 1, parent, cousins);
+        }
+    }
+    // Method to find the level of a node
+    public int findLevel(Node node, int data, int level) {
+        if (node == null) {
+            return 0;
+        }
+        if (node.data == data) {
+            return level;
+        }
+        int downLevel = findLevel(node.left, data, level + 1);
+        if (downLevel != 0) {
+            return downLevel;
+        }
+        downLevel = findLevel(node.right, data, level + 1);
+        return downLevel;
 
-}
+    }
+    public int findDepth(Node node, int data, int depth) {
+        if (node == null) {
+            return 0;
+        }
+        if (node.data == data) {
+            return depth;
+        }
+        int leftDepth = findDepth(node.left, data, depth + 1);
+        int rightDepth = findDepth(node.right, data, depth + 1);
+        return Math.max(leftDepth, rightDepth);
+    }
+
+    public int findHeight(Node node) {
+        if (node == null) {
+            return -1; // Height of empty tree is -1
+        }
+        int leftHeight = findHeight(node.left);
+        int rightHeight = findHeight(node.right);
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    public static void main(String[] args) {
+        BinarySearchTree tree = new BinarySearchTree();
+
+        // Insert nodes
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(70);
+        tree.insert(20);
+        tree.insert(40);
+        tree.insert(60);
+        tree.insert(80);
+
+        // Print inorder traversal
+        System.out.println("Inorder traversal:");
+        tree.inOrderTraversal();
+        System.out.println();
+
+        // Print preorder traversal
+        System.out.println("Preorder traversal:");
+        tree.preOrderTraversal();
+        System.out.println();
+
+        // Print postorder traversal
+        System.out.println("Postorder traversal:");
+        tree.postOrderTraversal();
+        System.out.println();
+
+        // Find parent of a node
+        int nodeId = 60; // Change this to test with different nodes
+        Node parent = tree.findParent(tree.root, nodeId);
+        System.out.println("Parent of node " + nodeId + ": " + (parent != null ? parent.data : "None"));
+
+        // Find cousins of a node
+        List<Integer> cousins = tree.findCousins(nodeId);
+        System.out.println("Cousins of node " + nodeId + ": " + cousins);
+
+        // Find level of a node
+        int level = tree.findLevel(tree.root, nodeId, 1);
+        System.out.println("Level of node " + nodeId + ": " + level);
+    }
+    }
 
