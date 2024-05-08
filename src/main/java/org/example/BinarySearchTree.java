@@ -2,6 +2,7 @@ package org.example;
 
 
     class Node {
+        //sirt
         int data;
         Node left;
         Node right;
