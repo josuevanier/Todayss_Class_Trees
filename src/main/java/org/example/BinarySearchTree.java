@@ -260,7 +260,7 @@ public class BinarySearchTree {
         int leftDepth = findDepth(node.left, data, depth + 1);
         int rightDepth = findDepth(node.right, data, depth + 1);
         return Math.max(leftDepth, rightDepth);
-    }
+    }//
 
     public int findHeight(Node node) {
         if (node == null) {
