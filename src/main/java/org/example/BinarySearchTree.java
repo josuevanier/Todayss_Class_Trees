@@ -270,6 +270,22 @@ public class BinarySearchTree {
         int rightHeight = findHeight(node.right);
         return Math.max(leftHeight, rightHeight) + 1;
     }
+    public Node findCommonAncestor(int node1, int node2) {
+        return findCommonAncestor(root, node1, node2);
+    }
+
+    private Node findCommonAncestor(Node node, int node1, int node2) {
+        if (node == null) {
+            return null;
+        }
+        if (node.data > node1 && node.data > node2) {
+            return findCommonAncestor(node.left, node1, node2);
+        } else if (node.data < node1 && node.data < node2) {
+            return findCommonAncestor(node.right, node1, node2);
+        } else {
+            return node;
+        }
+    }
 
     public static void main(String[] args) {
         BinarySearchTree tree = new BinarySearchTree();
