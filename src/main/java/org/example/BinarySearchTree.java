@@ -140,7 +140,52 @@ public class BinarySearchTree {
                 }
             }
         }
-
     }
+
+    // Other methods...
+
+    // In-order traversal
+    public void inOrderTraversal() {
+        inOrderTraversal(root);
+    }
+
+    private void inOrderTraversal(Node root) {
+        if (root == null) {
+            return;
+        }
+        inOrderTraversal(root.left);
+        System.out.print(root.data + " ");
+        inOrderTraversal(root.right);
+    }
+
+    // Pre-order traversal
+    public void preOrderTraversal() {
+        preOrderTraversal(root);
+    }
+
+    private void preOrderTraversal(Node root) {
+        if (root == null) {
+            return;
+        }
+        System.out.print(root.data + " ");
+        preOrderTraversal(root.left);
+        preOrderTraversal(root.right);
+    }
+
+    // Post-order traversal
+    public void postOrderTraversal() {
+        postOrderTraversal(root);
+    }
+
+    private void postOrderTraversal(Node root) {
+        if (root == null) {
+            return;
+        }
+        postOrderTraversal(root.left);
+        postOrderTraversal(root.right);
+        System.out.print(root.data + " ");
+    }
+
+
 }
 
