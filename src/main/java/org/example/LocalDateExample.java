@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Locale;
 
 public class LocalDateExample {
-
     public static void main(String[] args) {
         // Create a Locale for German language in Germany
         Locale deLocale = new Locale("de", "DE");
