@@ -6,6 +6,29 @@ public class BigONotationClass {
 
 class question1{
     /*
+    // Method with O(1) time complexity
+int getElement(int[] array, int index) {
+    if (index < 0 || index >= array.length) {
+        throw new IndexOutOfBoundsException("Index out of bounds");
+    }
+    return array[index]; // Accessing an element in an array by index takes constant time
+    // Regardless of the size of the array, accessing an element by index is a direct operation
+    // It doesn't depend on the size of the array; it directly computes the memory address of the element
+    // Therefore, the time complexity of this operation is O(1) or constant time
+}
+     */
+    ///////
+    /*
+    // Method with O(1) time complexity
+int happy(int n, int m) {
+    return n; // This statement executes only once, regardless of the value of 'n' or 'm'
+    // It doesn't involve any loops or recursive calls, and its execution time is constant
+    // Therefore, the time complexity of this method is O(1) or constant time
+    // It doesn't depend on the input size or any other factors; it always takes the same amount of time to execute
+}
+     */
+    ///////
+    /*
     o(n)
     int happy(int n, int m){
     if(n < 10) return n;
