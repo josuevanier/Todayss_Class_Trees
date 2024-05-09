@@ -25,6 +25,7 @@ public class BinarySearchTree {
     }
 
     public boolean find(int id) {
+        //o(logn)
         Node current = root;
         while (current != null) {
             if (current.data == id) {
