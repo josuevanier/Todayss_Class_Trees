@@ -316,4 +316,18 @@ class ArraySortsChecker {
 
         return isSorted(arr, index + 1);
     }
+
+    public static int sumInRange(int begin, int end) {
+        // Base case: If begin is greater than end, return 0
+        if (begin > end) {
+            return 0;
+        }
+        // Base case: If begin and end are the same, return begin
+        if (begin == end) {
+            return begin;
+        }
+        // Recursive case: Calculate sum of range [begin+1, end] and add begin to it
+        return begin + sumInRange(begin + 1, end);
+
+    }
 }
