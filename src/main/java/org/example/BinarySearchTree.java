@@ -347,5 +347,30 @@ public class BinarySearchTree {
             return node.data + sumInRange(node.left, low, high) + sumInRange(node.right, low, high);
         }
     }
+    public List<Integer> findChildren(int data) {
+        List<Integer> children = new ArrayList<>();
+        Node node = findNode(root, data); // Find the node with the given data
+        if (node != null) {
+            if (node.left != null) {
+                children.add(node.left.data);
+            }
+            if (node.right != null) {
+                children.add(node.right.data);
+            }
+        }
+        return children;
+    }
+
+    // Helper method to find a node with the given data
+    private Node findNode(Node node, int data) {
+        if (node == null || node.data == data) {
+            return node;
+        }
+        if (data < node.data) {
+            return findNode(node.left, data); // Search in the left subtree
+        } else {
+            return findNode(node.right, data); // Search in the right subtree
+        }
+    }
     }
 
