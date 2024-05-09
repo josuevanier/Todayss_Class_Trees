@@ -113,3 +113,57 @@ class   StreamSortAndSum {
         System.out.println("Sum of sorted numbers: " + sum);
     }
 }
+class RaggedArrayRepeatedElements {
+    public static void main(String[] args) {
+        // Example ragged array
+        int[][] raggedArray = {
+                {1, 2, 3},
+                {4, 5},
+                {1, 2, 4, 5},
+                {1, 2, 3, 4, 5}
+        };
+
+        // Flatten the ragged array into a single array
+        int[] flattenedArray = Arrays.stream(raggedArray)
+                .flatMapToInt(Arrays::stream)
+                .toArray();
+
+        // Count the frequency of each element using a map
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        for (int num : flattenedArray) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
+
+        // Print repeated elements and their frequencies
+        System.out.println("Repeated elements and their frequencies:");
+        frequencyMap.entrySet().stream()
+                .filter(entry -> entry.getValue() > 1)
+                .forEach(entry -> System.out.println("Element: " + entry.getKey() + ", Frequency: " + entry.getValue()));
+    }
+}
+class RaggedArrayOperations {
+    public static void main(String[] args) {
+
+        // Example ragged array
+        int[][] raggedArray = {
+                {1, 2, 3},
+                {4, 5},
+                {1, 2, 4, 5},
+                {1, 2, 3, 4, 5}
+        };
+
+        // Calculate total product of all elements in the array
+        int totalProduct = Arrays.stream(raggedArray)
+                .flatMapToInt(Arrays::stream)
+                .reduce(1, (x, y) -> x * y);
+        System.out.println("Total Product: " + totalProduct);
+
+        // Calculate total division (quotient) of all elements in the array
+        // Calculate total division (quotient) of all elements in the array
+        double totalDivision = Arrays.stream(raggedArray)
+                .flatMapToDouble(row -> Arrays.stream(row).asDoubleStream())
+                .filter(x -> x != 0) // Filter out division by zero
+                .reduce(1.0, (x, y) -> x / y);
+        System.out.println("Total Division: " + totalDivision);
+    }
+}
