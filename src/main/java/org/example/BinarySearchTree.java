@@ -328,5 +328,24 @@ public class BinarySearchTree {
         int level = tree.findLevel(tree.root, nodeId, 1);
         System.out.println("Level of node " + nodeId + ": " + level);
     }
+    // Method to find the sum of values within a given range [low, high]
+    public int sumInRange(int low, int high) {
+        return sumInRange(root, low, high);
+    }
+
+    // Helper method for recursive traversal and sum calculation
+    private int sumInRange(Node node, int low, int high) {
+        if (node == null) {
+            return 0;
+        }
+        if (node.data < low) {
+            return sumInRange(node.right, low, high); // Search in the right subtree
+        } else if (node.data > high) {
+            return sumInRange(node.left, low, high); // Search in the left subtree
+        } else {
+            // Node data is within the range [low, high], so include it in the sum
+            return node.data + sumInRange(node.left, low, high) + sumInRange(node.right, low, high);
+        }
+    }
     }
 
