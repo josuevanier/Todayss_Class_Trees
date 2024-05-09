@@ -45,6 +45,7 @@ public class RecursionMethods {
         printCountDown(n - 1);
     }
     public static void towersOfHanoi(int n, char source, char auxiliary, char destination) {
+        //2^n
         if (n == 1) {
             System.out.println("Move disk 1 from rod " + source + " to rod " + destination);
             return;
