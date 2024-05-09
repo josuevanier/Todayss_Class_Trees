@@ -51,7 +51,8 @@ public class LocalDateExample {
         Date now = new Date();
 
         // Create a DateFormat instance for displaying date and time in long format for the German locale
-        DateFormat germanDateTimeFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, deLocale);
+        DateFormat germanDateTimeFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
+                DateFormat.LONG, deLocale);
 
         // Format the date and time using the German locale
         String formattedDateTimeDE = germanDateTimeFormat.format(now);
